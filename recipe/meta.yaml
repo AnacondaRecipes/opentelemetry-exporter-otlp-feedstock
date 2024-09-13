@@ -13,12 +13,14 @@ source:
 build:
   number: 0
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv -vv --no-deps --no-build-isolation
+
 
 requirements:
   host:
     - pip
     - python >=3.6
+    - wheel
   run:
     - python >=3.6
     - opentelemetry-exporter-otlp-proto-grpc ==1.12.0
@@ -38,7 +40,14 @@ about:
   summary: OpenTelemetry Collector Exporters
   license: Apache-2.0
   license_file: LICENSE
+  dev_url:  https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
+  doc_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/docs
 
 extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/49522
+    reason: Dependency for chainlit
+  recipe-maintainers:
+    - ianaobi
   recipe-maintainers:
     - mariusvniekerk
