@@ -26,7 +26,7 @@ requirements:
 
 test:
   imports:
-    - opentelemetry_exporter_otlp
+    - opentelemetry.exporter.otlp
   commands:
     - pip check
   requires:
