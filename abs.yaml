@@ -1,0 +1,4 @@
+channels:
+  - https://staging.continuum.io/prefect/fs/opentelemetry-exporter-otlp-proto-common-feedstock/pr4/299c469
+  - https://staging.continuum.io/prefect/fs/opentelemetry-exporter-otlp-proto-http-feedstock/pr3/6129265
+  - https://staging.continuum.io/prefect/fs/opentelemetry-exporter-otlp-proto-grpc-feedstock/pr3/e61b218
