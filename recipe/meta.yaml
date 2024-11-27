@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-exporter-otlp" %}
-{% set version = "1.12.0" %}
+{% set version = "1.26.0" %}
 
 
 package:
@@ -7,26 +7,25 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/opentelemetry-exporter-otlp-{{ version }}.tar.gz
-  sha256: ecc9f0c22b98b0ca860e80736fb2c5225032814de3da6f531eeaf365643f5650
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_exporter_otlp-{{ version }}.tar.gz
+  sha256: cf0e093f080011951d9f97431a83869761e4d4ebe83a4195ee92d7806223299c
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
+    - hatchling
   run:
-    - python >=3.6
-    - opentelemetry-exporter-otlp-proto-grpc ==1.12.0
-    - opentelemetry-exporter-otlp-proto-http ==1.12.0
+    - python
+    - opentelemetry-exporter-otlp-proto-grpc ==1.26.0
+    - opentelemetry-exporter-otlp-proto-http ==1.26.0
 
 test:
   imports:
-    - opentelemetry
     - opentelemetry.exporter.otlp
   commands:
     - pip check
@@ -36,8 +35,13 @@ test:
 about:
   home: https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
   summary: OpenTelemetry Collector Exporters
+  description: |
+    This library is provided as a convenience to install all supported OpenTelemetry Collector Exporters. 
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
+  dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
+  doc_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
 
 extra:
   recipe-maintainers:
