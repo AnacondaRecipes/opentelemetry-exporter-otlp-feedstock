@@ -7,7 +7,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_exporter_otlp-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
   sha256: f85b1929dd0d750751cc9159376fb05aa88bb7a08b6cdbf84edb0054d93e9f26
 
 build:
@@ -25,17 +25,16 @@ requirements:
     - opentelemetry-exporter-otlp-proto-grpc =={{ version }}
     - opentelemetry-exporter-otlp-proto-http =={{ version }}
 
+# Tests disabled:
+# E   ModuleNotFoundError: No module named 'opentelemetry.test'
+# https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
 test:
-  source_files:
-    - tests
   imports:
     - opentelemetry.exporter.otlp
   commands:
     - pip check
-    - pytest -v tests
   requires:
     - pip
-    - pytest
 
 about:
   home: https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
