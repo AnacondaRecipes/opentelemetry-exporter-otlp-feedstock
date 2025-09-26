@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-exporter-otlp" %}
-{% set version = "1.30.0" %}
+{% set version = "1.37.0" %}
 
 
 package:
@@ -7,12 +7,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_exporter_otlp-{{ version }}.tar.gz
-  sha256: da7769f95cd5be5b09dd4188ac153a33709eda652217f2d10aed6518c8e60f0d
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: f85b1929dd0d750751cc9159376fb05aa88bb7a08b6cdbf84edb0054d93e9f26
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<39]
 
 requirements:
   host:
@@ -21,9 +22,12 @@ requirements:
     - hatchling
   run:
     - python
-    - opentelemetry-exporter-otlp-proto-grpc ==1.30.0
-    - opentelemetry-exporter-otlp-proto-http ==1.30.0
+    - opentelemetry-exporter-otlp-proto-grpc =={{ version }}
+    - opentelemetry-exporter-otlp-proto-http =={{ version }}
 
+# Tests disabled:
+# E   ModuleNotFoundError: No module named 'opentelemetry.test'
+# https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
 test:
   imports:
     - opentelemetry.exporter.otlp
@@ -41,7 +45,7 @@ about:
   license_file: LICENSE
   license_family: Apache
   dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
-  doc_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
+  doc_url: https://github.com/open-telemetry/opentelemetry-python/blob/main/exporter/opentelemetry-exporter-otlp/README.rst
 
 extra:
   recipe-maintainers:
