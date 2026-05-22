@@ -11,7 +11,7 @@ source:
   sha256: ecc9f0c22b98b0ca860e80736fb2c5225032814de3da6f531eeaf365643f5650
 
 build:
-  number: 0
+  number: 4
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   # No opentelemetry-exporter-otlp-proto-http support for py>312
   skip: true  # [py<36 or py>312]
