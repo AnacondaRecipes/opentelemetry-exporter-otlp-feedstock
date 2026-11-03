@@ -1,14 +1,16 @@
 {% set name = "opentelemetry-exporter-otlp" %}
-{% set version = "1.43.0" %}
+{% set version = "1.45.2" %}
 
-
+# Tests disabled:
+# E   ModuleNotFoundError: No module named 'opentelemetry.test'
+# https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: 65aded6c50ee7dd2b9948c9d0e59ddb4ed4eea6e8532fba95cbe6a4a64a566ba
+  sha256: 879044ba65b8b1be7a0d9d904afb76700e96d2a4d36700918d9325c9ee3b8be4
 
 build:
   number: 0
@@ -22,12 +24,9 @@ requirements:
     - hatchling
   run:
     - python
-    - opentelemetry-exporter-otlp-proto-grpc =={{ version }}
-    - opentelemetry-exporter-otlp-proto-http =={{ version }}
+    - opentelemetry-exporter-otlp-proto-grpc ==1.45.2
+    - opentelemetry-exporter-otlp-proto-http ==1.45.2
 
-# Tests disabled:
-# E   ModuleNotFoundError: No module named 'opentelemetry.test'
-# https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
 test:
   imports:
     - opentelemetry.exporter.otlp
@@ -43,7 +42,7 @@ about:
   license_family: Apache
   summary: OpenTelemetry Collector Exporters
   description: |
-    This library is provided as a convenience to install all supported OpenTelemetry Collector Exporters. 
+    This library is provided as a convenience to install all supported OpenTelemetry Collector Exporters.
   dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp
   doc_url: https://github.com/open-telemetry/opentelemetry-python/blob/main/exporter/opentelemetry-exporter-otlp/README.rst
 
